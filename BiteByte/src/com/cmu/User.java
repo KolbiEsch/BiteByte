@@ -7,12 +7,12 @@ public class User {
 	private String ID;
 	
 	
-	public User(String name, String email, String password, String iD) {
+	public User(String name, String email, String password, String ID) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		ID = iD;
+		this.ID = ID;
 	}
 	
 	public String getName() {
@@ -36,9 +36,7 @@ public class User {
 	public String getID() {
 		return ID;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
-	
-	
 }
