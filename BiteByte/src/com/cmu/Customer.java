@@ -1,12 +1,14 @@
 package com.cmu;
 
+import java.util.List;
+
 public class Customer extends User {
 
 	private Address address;
 	public List<Order> orders;
 	
-	public Customer(String name, String email, String password, String ID) {
-		super(name, email, password, ID);
+	public Customer(String name, String email, String password) {
+		super(name, email, password);
 	}
 
 	public Address getAddress() {

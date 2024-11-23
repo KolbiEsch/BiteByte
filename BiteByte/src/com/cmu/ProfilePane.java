@@ -3,6 +3,7 @@ package com.cmu;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -11,8 +12,13 @@ import javafx.scene.layout.VBox;
 
 public class ProfilePane {
 	
-	private static Button accountBtn;
-	private static Button ordersBtn;
+	private Button accountBtn;
+	private Button ordersBtn;
+	private UserManager userManager;
+	
+	public ProfilePane() {
+		userManager = UserManager.getInstance();
+	}
 	
 	public Pane getProfilePane() {
 		BorderPane pane = new BorderPane();
@@ -36,7 +42,7 @@ public class ProfilePane {
 		return pane;
 	}
 	
-	private static Pane getNav() {
+	private Pane getNav() {
 		VBox profileNav = new VBox();
 		
 		accountBtn = new Button("Account");
@@ -49,8 +55,18 @@ public class ProfilePane {
 		return profileNav;
 	}
 	
-	private static Pane getAccountPane() {
+	private Pane getAccountPane() {
 		GridPane accountGrid = new GridPane();
+		
+		User user = userManager.getCurrentUser();
+		
+		Label emailLbl = new Label("Email:");
+		Label passwordLbl = new Label("Password:");
+		
+		TextField emailField = new TextField();
+		emailField.setText(user.getEmail());
+		PasswordField passwordField = new PasswordField();
+		passwordField.setText(user.getPassword());
 		
 		Label line1Lbl = new Label("Line 1:");
 		Label line2Lbl = new Label("Line 2:");
@@ -64,17 +80,23 @@ public class ProfilePane {
 		TextField stateField = new TextField();
 		TextField ZIPField = new TextField();
 		
-		accountGrid.add(line1Lbl, 0, 0);
-		accountGrid.add(line1Field, 1, 0);
+		Button saveBtn = new Button("Save Changes");
 		
-		accountGrid.add(line2Lbl, 0, 1);
-		accountGrid.add(line2Field, 1, 1);
-		accountGrid.add(cityLbl, 0, 2);
-		accountGrid.add(cityField, 1, 2);
-		accountGrid.add(stateLbl, 0, 3);
-		accountGrid.add(stateField, 1, 3);
-		accountGrid.add(ZIPLbl, 0, 4);
-		accountGrid.add(ZIPField, 1, 4);
+		accountGrid.add(emailLbl, 0, 0);
+		accountGrid.add(emailField, 1, 0);
+		accountGrid.add(passwordLbl, 0, 1);
+		accountGrid.add(passwordField, 1, 1);
+		accountGrid.add(line1Lbl, 0, 2);
+		accountGrid.add(line1Field, 1, 2);
+		accountGrid.add(line2Lbl, 0, 3);
+		accountGrid.add(line2Field, 1, 3);
+		accountGrid.add(cityLbl, 0, 4);
+		accountGrid.add(cityField, 1, 4);
+		accountGrid.add(stateLbl, 0, 5);
+		accountGrid.add(stateField, 1, 5);
+		accountGrid.add(ZIPLbl, 0, 6);
+		accountGrid.add(ZIPField, 1, 6);
+		accountGrid.add(saveBtn, 0, 7);
 		
 		accountGrid.setStyle("-fx-border-color: orange");
 		
