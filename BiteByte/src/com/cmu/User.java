@@ -4,15 +4,15 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private String ID;
+	private int ID;
+	private boolean isSignedIn;
 	
 	
-	public User(String name, String email, String password, String ID) {
+	public User(String name, String email, String password) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.ID = ID;
 	}
 	
 	public String getName() {
@@ -33,10 +33,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getID() {
+	public int getID() {
 		return ID;
 	}
-	public void setID(String ID) {
+	public void setID(int ID) {
 		this.ID = ID;
+	}
+	public void setSignedIn(boolean value) {
+		this.isSignedIn = value;
+	}
+	public boolean getSignedIn() {
+		return this.isSignedIn;
 	}
 }
