@@ -7,6 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -17,13 +20,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Sample User and Restaurant Data
-        User user = new User("John Doe", "john@example.com", "password123");
+        Customer user = new Customer("John Doe", "john@example.com", "password123");
         userManager.createUser(user);
 
         // Setting up the Restaurant menu
-        Item item1 = new Item("Burger", 5.99);
-        Item item2 = new Item("Fries", 2.49);
-        Item item3 = new Item("Soda", 1.99);
+        Item item1 = new Item("Burger", 5.99, true);
+        Item item2 = new Item("Fries", 2.49, true);
+        Item item3 = new Item("Soda", 1.99, true);
 
         ArrayList<Item> menu = new ArrayList<>();
         menu.add(item1);
@@ -72,7 +75,7 @@ public class Main extends Application {
             for (Item item : restaurant.getMenu()) {
                 selectedItems.add(item);  // For demo, adding all items
             }
-            Order order = new Order("ORD001", selectedItems);
+            Order order = new Order("ORD001", user, restaurant);
 
             // Generate receipt
             Receipt receipt = new Receipt(order, 10.47); // Example total paid
@@ -93,3 +96,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    public static void main(String args[]) {
+    	launch(args);
+    }
+}

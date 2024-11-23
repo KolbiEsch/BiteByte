@@ -15,14 +15,13 @@ public class Order {
     private LocalDateTime orderTime; 
 
     // Constructor to initialize an Order object
-    public Order(String orderId, Customer customer, Restaurant restaurant, LocalDateTime orderTime) {
+    public Order(String orderId, Customer customer, Restaurant restaurant) {
         this.orderId = orderId;
         this.customer = customer;
         this.restaurant = restaurant;
         this.items = new ArrayList<>(); 
         this.totalPrice = 0.0;
-        this.status = "pending"; 
-        this.orderTime = orderTime; 
+        this.status = "pending";  
     }
 
     // Getters and setters for each attribute

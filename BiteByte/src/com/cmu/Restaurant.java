@@ -1,4 +1,4 @@
-package com.group;
+package com.cmu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
