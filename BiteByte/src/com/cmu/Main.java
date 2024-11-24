@@ -19,34 +19,24 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Sample User and Restaurant Data
-        Customer user = new Customer("John Doe", "john@example.com", "password123");
-        user.setSignedIn(true);
-        userManager.createUser(user);
-        
         /*
          * BorderPane is the main pane. When you want to switch panes using nav
          * have the action of the button be to set that pane to BorderPane center.
-         * See below for examples.
+         * See NavbarPane class for an example.
          */
         BorderPane pane = new BorderPane();
-		HBox navbar = new HBox();
-		
-		Button profileBtn = new Button("Profile");
-		navbar.setMargin(profileBtn, new Insets(0, 10, 0, 0));
-		Button restaurantsBtn = new Button("Restaurants");
-		
-		navbar.setPadding(new Insets(15));
-		navbar.getChildren().addAll(profileBtn, restaurantsBtn);
-		
-		pane.setTop(navbar);
-		
-		// Example of BorderPane nav relationship.
-		profileBtn.setOnAction(e -> {
-			ProfilePane profile = new ProfilePane();
-			pane.setCenter(profile.getPane());
-		});
-
+        
+        LoginPane loginPane = new LoginPane(pane);
+        pane.setCenter(loginPane.getPane());
+        
+        Scene scene = new Scene(pane, 400, 300);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setTitle("Restaurant App");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+        // Kolbi: I commented out this code so the program will work until it can be moved into it's own pane class.
+		/*
         // Setting up the Restaurant menu
         Item item1 = new Item("Burger", 5.99, true);
         Item item2 = new Item("Fries", 2.49, true);
@@ -116,12 +106,8 @@ public class Main extends Application {
         restaurantsBtn.setOnAction(e -> {
         	pane.setCenter(root);
         });
-
-        Scene scene = new Scene(pane, 400, 300);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        primaryStage.setTitle("Restaurant App");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+	*/
+        
     }
     
     public static void createCustomers() {
