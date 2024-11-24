@@ -44,4 +44,11 @@ class UserManager {
 	public List<User> getUsers() {
 		return this.users;
 	}
+	
+	public User getUserByEmail(String email) {
+		return users.stream()
+				.filter(user -> user.getEmail().equals(email))
+				.findFirst()
+				.orElse(null);
+	}
 }
