@@ -21,7 +21,31 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         // Sample User and Restaurant Data
         Customer user = new Customer("John Doe", "john@example.com", "password123");
+        user.setSignedIn(true);
         userManager.createUser(user);
+        
+        /*
+         * BorderPane is the main pane. When you want to switch panes using nav
+         * have the action of the button be to set that pane to BorderPane center.
+         * See below for examples.
+         */
+        BorderPane pane = new BorderPane();
+		HBox navbar = new HBox();
+		
+		Button profileBtn = new Button("Profile");
+		navbar.setMargin(profileBtn, new Insets(0, 10, 0, 0));
+		Button restaurantsBtn = new Button("Restaurants");
+		
+		navbar.setPadding(new Insets(15));
+		navbar.getChildren().addAll(profileBtn, restaurantsBtn);
+		
+		pane.setTop(navbar);
+		
+		// Example of BorderPane nav relationship.
+		profileBtn.setOnAction(e -> {
+			ProfilePane profile = new ProfilePane();
+			pane.setCenter(profile.getPane());
+		});
 
         // Setting up the Restaurant menu
         Item item1 = new Item("Burger", 5.99, true);
@@ -34,13 +58,11 @@ public class Main extends Application {
         menu.add(item3);
 
         restaurant = new Restaurant("Burger Joint", "Fast Food", "001", menu);
-
-        // JavaFX UI Components
-        primaryStage.setTitle("Restaurant App");
+        
 
         VBox root = new VBox(10);
         root.setPadding(new Insets(20));
-
+        
         // Restaurant Label
         Label restaurantLabel = new Label("Restaurant: " + restaurant.getName() + " (" + restaurant.getType() + ")");
         restaurantLabel.getStyleClass().add("label");
@@ -90,9 +112,14 @@ public class Main extends Application {
                 selectButton,
                 createOrderButton
         );
+        
+        restaurantsBtn.setOnAction(e -> {
+        	pane.setCenter(root);
+        });
 
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(pane, 400, 300);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setTitle("Restaurant App");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

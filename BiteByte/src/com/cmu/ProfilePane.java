@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class ProfilePane {
+public class ProfilePane implements BasePane {
 	
 	private Button accountBtn;
 	private Button ordersBtn;
@@ -20,7 +20,7 @@ public class ProfilePane {
 		userManager = UserManager.getInstance();
 	}
 	
-	public Pane getProfilePane() {
+	public Pane getPane() {
 		BorderPane pane = new BorderPane();
 		
 		Pane profileNav = getNav();
