@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    private UserManager userManager = UserManager.getInstance();
+    private static UserManager userManager = UserManager.getInstance();
     private Restaurant restaurant;
 
     @Override
@@ -124,7 +124,35 @@ public class Main extends Application {
         primaryStage.show();
     }
     
+    public static void createCustomers() {
+    	Customer customerDemo1 = new Customer("Customer Demo 1", "customerdemo1@gmail.com", "customer1pass");
+    	Customer customerDemo2 = new Customer("Customer Demo 2", "customerdemo2@gmail.com", "customer2pass");
+    	Customer customerDemo3 = new Customer("Customer Demo 3", "customerdemo3@gmail.com", "customer3pass");
+    	Customer customerDemo4 = new Customer("Customer Demo 4", "customerdemo4@gmail.com", "customer4pass");
+    	Customer customerDemo5 = new Customer("Customer Demo 5", "customerdemo5@gmail.com", "customer5pass");
+    	userManager.createUser(customerDemo1);
+    	userManager.createUser(customerDemo2);
+    	userManager.createUser(customerDemo3);
+    	userManager.createUser(customerDemo4);
+    	userManager.createUser(customerDemo5);
+    }
+    
+    public static void createDrivers() {
+    	DeliveryDriver driverDemo1 = new DeliveryDriver("Delivery Demo 1", "deliverydemo1@gmail.com", "delivery1pass");
+    	DeliveryDriver driverDemo2 = new DeliveryDriver("Delivery Demo 2", "deliverydemo2@gmail.com", "delivery2pass");
+    	DeliveryDriver driverDemo3 = new DeliveryDriver("Delivery Demo 3", "deliverydemo3@gmail.com", "delivery3pass");
+    	DeliveryDriver driverDemo4 = new DeliveryDriver("Delivery Demo 4", "deliverydemo4@gmail.com", "delivery4pass");
+    	DeliveryDriver driverDemo5 = new DeliveryDriver("Delivery Demo 5", "deliverydemo5@gmail.com", "delivery5pass");
+    	userManager.createUser(driverDemo1);
+    	userManager.createUser(driverDemo2);
+    	userManager.createUser(driverDemo3);
+    	userManager.createUser(driverDemo4);
+    	userManager.createUser(driverDemo5);
+    }
+    
     public static void main(String args[]) {
+    	createCustomers();
+    	createDrivers();
     	launch(args);
     }
 }
