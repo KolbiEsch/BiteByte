@@ -10,7 +10,7 @@ public class DeliveryDriver extends User {
 	public Deque<Order> orderQueue;
 	public List<Order> completedOrders;
 	
-	public DeliveryDriver(String name, String email, String password, String ID) {
-		super(name, email, password, ID);
+	public DeliveryDriver(String name, String email, String password) {
+		super(name, email, password);
 	}
 }
