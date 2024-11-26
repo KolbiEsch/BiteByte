@@ -30,7 +30,7 @@ public class Main extends Application {
         LoginPane loginPane = new LoginPane(pane);
         pane.setCenter(loginPane.getPane());
         
-        Scene scene = new Scene(pane, 400, 300);
+        Scene scene = new Scene(pane, 370, 650);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("Restaurant App");
         primaryStage.setScene(scene);
