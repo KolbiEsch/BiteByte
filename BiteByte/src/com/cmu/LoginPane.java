@@ -42,9 +42,13 @@ public class LoginPane implements BasePane {
 				loginPane.getChildren().remove(loginErrorLbl);
 				loginPane.add(loginErrorLbl, 0, 5);
 			} else {
-				mainPane.setTop(getNavbar(mainPane));
-				mainPane.setCenter(getHomePane());
-				user.setSignedIn(true);
+				if (user instanceof DeliveryDriver) {
+					mainPane.setCenter(getDriverPane());
+				} else {
+					mainPane.setTop(getNavbar(mainPane));
+					mainPane.setCenter(getCustomerHomePane());
+					user.setSignedIn(true);
+				}
 			}
 		});
 		
@@ -54,11 +58,15 @@ public class LoginPane implements BasePane {
 		return loginPane;
 	}
 	
-	private Pane getHomePane() {
+	private Pane getCustomerHomePane() {
 		return new HomePane().getPane();
 	}
 	
 	private Pane getNavbar(BorderPane mainPane) {
 		return new NavbarPane(mainPane).getPane();
+	}
+	
+	private Pane getDriverPane() {
+		return new DeliveryDriverPane().getPane();
 	}
 }
