@@ -43,7 +43,8 @@ public class LoginPane implements BasePane {
 				loginPane.add(loginErrorLbl, 0, 5);
 			} else {
 				if (user instanceof DeliveryDriver) {
-					mainPane.setCenter(getDriverPane());
+					DeliveryDriverPane driverPane = new DeliveryDriverPane((DeliveryDriver) user);
+					mainPane.setCenter(driverPane.getPane());
 				} else {
 					mainPane.setTop(getNavbar(mainPane));
 					mainPane.setCenter(getCustomerHomePane());
@@ -66,7 +67,7 @@ public class LoginPane implements BasePane {
 		return new NavbarPane(mainPane).getPane();
 	}
 	
-	private Pane getDriverPane() {
-		return new DeliveryDriverPane().getPane();
-	}
+//	private Pane getDriverPane() {
+//		return new DeliveryDriverPane().getPane();
+//	}
 }
