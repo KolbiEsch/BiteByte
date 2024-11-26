@@ -51,4 +51,20 @@ class UserManager {
 				.findFirst()
 				.orElse(null);
 	}
+	
+	public Customer getCustomerByEmail(String email) {
+		return (Customer) users.stream()
+				.filter(user -> user instanceof Customer)
+				.filter(user -> user.getEmail().equals(email))
+				.findFirst()
+				.orElse(null);
+	}
+	
+	public DeliveryDriver getDriverByEmail(String email) {
+		return (DeliveryDriver) users.stream()
+		.filter(user -> user instanceof DeliveryDriver)
+		.filter(user -> user.getEmail().equals(email))
+		.findFirst()
+		.orElse(null);
+	}
 }
