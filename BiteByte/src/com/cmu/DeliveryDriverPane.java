@@ -114,11 +114,11 @@ public class DeliveryDriverPane implements BasePane{
 		
 	}
 	
-	public Pane getDeliveryInformation(){
+	// public Pane getDeliveryInformation(){
 		
-		Label customerDetails = new Label();
+	// 	Label customerDetails = new Label();
 		
-	}
+	// }
 
 
 	
