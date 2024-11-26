@@ -7,7 +7,7 @@ import java.util.List;
 public class Order {
     // Attributes of the Order class
     private String orderId; 
-    private Customer customer; 
+    private User customer; 
     private Restaurant restaurant; 
     private List<Item> items; 
     private double totalPrice; 
@@ -15,7 +15,7 @@ public class Order {
     private LocalDateTime orderTime; 
 
     // Constructor to initialize an Order object
-    public Order(String orderId, Customer customer, Restaurant restaurant) {
+    public Order(String orderId, User customer, Restaurant restaurant) {
         this.orderId = orderId;
         this.customer = customer;
         this.restaurant = restaurant;
@@ -33,7 +33,7 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
