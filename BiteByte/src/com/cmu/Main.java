@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main extends Application {
 
@@ -136,9 +137,62 @@ public class Main extends Application {
     	userManager.createUser(driverDemo5);
     }
     
+    public static Restaurant getFastFoodRestaurant() {
+    	ArrayList<Item> fastFoodMenu = new ArrayList<>();
+    	Item item1 = new Item("Burger", 9.99, true);
+        Item item2 = new Item("Fries", 3.99, true);
+        Item item3 = new Item("Drink", 2.99, true);
+        Collections.addAll(fastFoodMenu, item1, item2, item3);
+        Restaurant fastFood = new Restaurant("Fast Food Joint", "Fast Food", "1", fastFoodMenu);
+    	
+    	return fastFood;
+    }
+    
+    public static Restaurant getApplebees() {
+    	ArrayList<Item> applebeesMenu = new ArrayList<>();
+    	Item item1 = new Item("8 oz Top Sirloin", 18.49, true);
+    	Item item2 = new Item("Whiskey Bacon Burger", 14.49, true);
+    	Item item3 = new Item("Neighborhood Burger", 12.49, true);
+    	Collections.addAll(applebeesMenu, item1, item2, item3);
+    	
+    	Restaurant applebees = new Restaurant("Applebees", "Casual Dining", "2", applebeesMenu);
+    	
+    	return applebees;
+    }
+    
+    public static Restaurant getTexasRoadhouse() {
+    	ArrayList<Item> texasRoadhouseMenu = new ArrayList<>();
+    	Item item1 = new Item("Cactus Blossom", 8.99, true);
+    	Item item2 = new Item("12 oz New York Strip", 24.99, true);
+    	Item item3 = new Item("Grilled Chicken Salad", 14.49, true);
+    	
+    	Collections.addAll(texasRoadhouseMenu, item1, item2, item3);
+    	
+    	Restaurant texasRoadhouse = new Restaurant("Texas Roadhouse", "Casual Dining", "3", texasRoadhouseMenu);
+    	
+    	return texasRoadhouse;
+    }
+    
+    public static void createOrders() {
+    	User customer1 = userManager.getUserByEmail("customerdemo1@gmail.com");
+    	Order order1 = new Order("1", customer1, getFastFoodRestaurant());
+    	order1.addItems(order1.getRestaurant().getMenu().get(0));
+    	order1.addItems(order1.getRestaurant().getMenu().get(1));
+    	
+    	Order order2 = new Order("2", customer1, getTexasRoadhouse());
+    	order2.addItems(order2.getRestaurant().getMenu().get(0));
+    	order2.addItems(order2.getRestaurant().getMenu().get(1));
+    	order2.setStatus("completed");
+    	
+    	DeliveryDriver deliveryDriver1 = userManager.getDriverByEmail("deliverydemo1@gmail.com");
+    	deliveryDriver1.addCompletedOrder(order2);
+    	deliveryDriver1.addOngoingOrder(order1.getOrderId(), order1);
+    }
+    
     public static void main(String args[]) {
     	createCustomers();
     	createDrivers();
+    	createOrders();
     	launch(args);
     }
 }
