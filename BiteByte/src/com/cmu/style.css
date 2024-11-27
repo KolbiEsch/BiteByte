@@ -7,11 +7,26 @@
 }
 
 /* Label Styles */
+
 .label {
     -fx-text-fill: #333333;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-padding: 10px;
+}
+
+#login-lbl {
+	-fx-padding: 10px 0 0 0;
+}
+
+#passwordLbl {
+	-fx-font-size: 14px;
+	-fx-font-weight: normal;
+}
+
+#error-lbl {
+	-fx-text-fill: red;
+	-fx-padding: 10px 0 0 0;
 }
 
 /* Button Styles */
