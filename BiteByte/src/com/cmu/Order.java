@@ -12,7 +12,8 @@ public class Order {
     private List<Item> items; 
     private double totalPrice; 
     private String status; 
-    private LocalDateTime orderTime; 
+    private LocalDateTime orderTime;
+    private String restaurantName;
 
     // Constructor to initialize an Order object
     public Order(String orderId, User customer, Restaurant restaurant) {
@@ -51,6 +52,10 @@ public class Order {
 
     public List<Item> getItems() {
         return items;
+    }
+    
+    public String getRestaurantName() {
+    	return restaurant.getName();
     }
 
     public void setItems(List<Item> items) {

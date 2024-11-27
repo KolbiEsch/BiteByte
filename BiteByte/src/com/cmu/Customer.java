@@ -1,5 +1,6 @@
 package com.cmu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends User {
@@ -9,6 +10,7 @@ public class Customer extends User {
 	
 	public Customer(String name, String email, String password) {
 		super(name, email, password);
+		orders = new ArrayList<Order>();
 	}
 
 	public Address getAddress() {

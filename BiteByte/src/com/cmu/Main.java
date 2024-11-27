@@ -174,15 +174,17 @@ public class Main extends Application {
     }
     
     public static void createOrders() {
-    	User customer1 = userManager.getUserByEmail("customerdemo1@gmail.com");
+    	Customer customer1 = userManager.getCustomerByEmail("customerdemo1@gmail.com");
     	Order order1 = new Order("1", customer1, getFastFoodRestaurant());
     	order1.addItems(order1.getRestaurant().getMenu().get(0));
     	order1.addItems(order1.getRestaurant().getMenu().get(1));
+    	customer1.orders.add(order1);
     	
     	Order order2 = new Order("2", customer1, getTexasRoadhouse());
     	order2.addItems(order2.getRestaurant().getMenu().get(0));
     	order2.addItems(order2.getRestaurant().getMenu().get(1));
     	order2.setStatus("completed");
+    	customer1.orders.add(order2);
     	
     	DeliveryDriver deliveryDriver1 = userManager.getDriverByEmail("deliverydemo1@gmail.com");
     	deliveryDriver1.addCompletedOrder(order2);
