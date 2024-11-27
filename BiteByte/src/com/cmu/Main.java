@@ -25,12 +25,14 @@ public class Main extends Application {
          * have the action of the button be to set that pane to BorderPane center.
          * See NavbarPane class for an example.
          */
+    	ScrollPane scrollContainer = new ScrollPane();
         BorderPane pane = new BorderPane();
+        scrollContainer.setContent(pane);
         
         LoginPane loginPane = new LoginPane(pane);
         pane.setCenter(loginPane.getPane());
         
-        Scene scene = new Scene(pane, 370, 650);
+        Scene scene = new Scene(scrollContainer, 370, 650);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("Restaurant App");
         primaryStage.setScene(scene);

@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class ProfilePane implements BasePane {
@@ -26,28 +28,22 @@ public class ProfilePane implements BasePane {
 	}
 	
 	public Pane getPane() {
-		BorderPane pane = new BorderPane();
+		VBox profilePane = new VBox();
 		
-		Pane profileNav = getNav();
+		//Pane profileNav = getNav();
+		Label accountLbl = new Label("Account");
+		Label orderLbl = new Label("Orders");
 		Pane accountPane = getAccountPane();
 		Pane ordersPane = getUserOrdersPane();
 		
-		pane.setLeft(profileNav);
-		pane.setCenter(accountPane);
+		profilePane.getChildren().addAll(accountLbl, accountPane, orderLbl, ordersPane);
+		profilePane.setMargin(accountLbl, new Insets(0, 0, 10, 0));
+		profilePane.setMargin(orderLbl, new Insets(20, 0, 10, 0));
 		
-		
-		
-		accountBtn.setOnAction(e -> {
-			pane.setCenter(accountPane);
-		});
-		
-		ordersBtn.setOnAction(e -> {
-			pane.setCenter(ordersPane);
-		});
-		
-		return pane;
+		return profilePane;
 	}
 	
+	/*
 	private Pane getNav() {
 		VBox profileNav = new VBox();
 		
@@ -60,9 +56,11 @@ public class ProfilePane implements BasePane {
 		
 		return profileNav;
 	}
+	*/
 	
 	private Pane getAccountPane() {
 		GridPane accountGrid = new GridPane();
+		accountGrid.setVgap(10);
 		
 		User user = userManager.getCurrentUser();
 		
@@ -113,7 +111,7 @@ public class ProfilePane implements BasePane {
 				userManager.setCustomerAddressAsync(address).start();
 			} else {
 				if (!accountGrid.getChildren().contains(addressUpdateLabel)) {
-					accountGrid.add(addressUpdateLabel, 0, 9);
+					accountGrid.add(addressUpdateLabel, 0, 9, 2, 1);
 				}
 			}
 		});
@@ -143,6 +141,7 @@ public class ProfilePane implements BasePane {
 		
 		Customer currentCustomer = userManager.getCurrentCustomer();
 		TableView<Order> ordersView = new TableView<>();
+		ordersView.setMinWidth(370);
 		
 		TableColumn<Order, String> IDColumn = new TableColumn<>("Order ID");
 		IDColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
