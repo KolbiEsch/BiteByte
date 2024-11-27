@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -22,16 +23,21 @@ public class LoginPane implements BasePane {
 		loginPane.setPadding(new Insets(20));
 		loginPane.setHgap(10);
 		loginPane.setVgap(10);
+		
+		loginPane.getColumnConstraints().add((new ColumnConstraints(200)));
 
 		// Labels
 		Label emailLbl = new Label("Email");
 		Label passwordLbl = new Label("Password");
+		emailLbl.setId("login-lbl");
+		passwordLbl.setId("login-lbl");
 		Label loginErrorLbl = new Label("Incorrect username or password");
-		loginErrorLbl.setStyle("-fx-text-fill: red;");
+		loginErrorLbl.setId("error-lbl");
 		loginErrorLbl.setVisible(false);
 
 		// Fields
 		TextField emailField = new TextField();
+		emailField.setMinWidth(200);
 		PasswordField passwordField = new PasswordField();
 
 		// Buttons
@@ -40,13 +46,13 @@ public class LoginPane implements BasePane {
 
 		// Add elements to the grid
 		loginPane.add(emailLbl, 0, 0);
-		loginPane.add(emailField, 1, 0);
+		loginPane.add(emailField, 0, 1);
 
-		loginPane.add(passwordLbl, 0, 1);
-		loginPane.add(passwordField, 1, 1);
+		loginPane.add(passwordLbl, 0, 2);
+		loginPane.add(passwordField, 0, 3);
 
-		loginPane.add(loginBtn, 1, 2);
-		loginPane.add(createAccountBtn, 1, 3);
+		loginPane.add(loginBtn, 0, 4);
+		loginPane.add(createAccountBtn, 0, 5);
 
 		// Login button action
 		loginBtn.setOnAction(e -> {
@@ -54,7 +60,7 @@ public class LoginPane implements BasePane {
 			if (user == null) {
 				loginErrorLbl.setVisible(true);
 				if (!loginPane.getChildren().contains(loginErrorLbl)) {
-					loginPane.add(loginErrorLbl, 1, 4);
+					loginPane.add(loginErrorLbl, 0, 6, 2, 1);
 				}
 			} else {
 				loginErrorLbl.setVisible(false);
