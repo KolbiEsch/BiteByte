@@ -1,17 +1,19 @@
- 
-
 package com.cmu;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantMenuPane implements BasePane {
 
     private BorderPane mainPane;
+    private List<Item> cart = new ArrayList<>(); // Cart to store selected items
+    private Label cartSummaryLabel; // Label for the cart summary
 
     public RestaurantMenuPane(BorderPane mainPane) {
         this.mainPane = mainPane;
@@ -21,6 +23,20 @@ public class RestaurantMenuPane implements BasePane {
     public Pane getPane() {
         VBox restaurantMenuBox = new VBox(10);
         restaurantMenuBox.setPadding(new Insets(20));
+
+        // Cart Summary Section
+        HBox cartSummaryBox = new HBox(10);
+        cartSummaryBox.setPadding(new Insets(10));
+        cartSummaryBox.setStyle("-fx-border-color: lightgray; -fx-background-color: #f9f9f9; -fx-border-width: 1;");
+
+        Button cartButton = new Button("View Cart");
+        cartButton.setOnAction(e -> showCartView());
+
+        cartSummaryLabel = new Label(getCartSummary());
+        cartSummaryLabel.setFont(Font.font(14));
+
+        cartSummaryBox.getChildren().addAll(cartButton, cartSummaryLabel);
+        restaurantMenuBox.getChildren().add(cartSummaryBox);
 
         // Restaurant buttons for 5 different restaurants
         Button fastFoodBtn = new Button("Fast Food Joint");
@@ -61,16 +77,87 @@ public class RestaurantMenuPane implements BasePane {
         addToCartButton.setOnAction(e -> {
             String selectedItem = menuListView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                System.out.println("Added to Cart: " + selectedItem);
-                // Logic for adding to cart goes here
+                for (Item item : restaurant.getMenu()) {
+                    if (selectedItem.startsWith(item.getName())) {
+                        cart.add(item);
+                        updateCartSummary();
+                        System.out.println("Added to Cart: " + selectedItem);
+                        break;
+                    }
+                }
             }
         });
 
+        // Back button
+        Button backButton = new Button("Back to Restaurants");
+        backButton.setOnAction(e -> mainPane.setCenter(getPane()));
+
         // Layout for the menu view
-        menuBox.getChildren().addAll(restaurantLabel, menuListView, addToCartButton);
+        menuBox.getChildren().addAll(restaurantLabel, menuListView, addToCartButton, backButton);
 
         // Switch to the restaurant menu screen
         mainPane.setCenter(menuBox);
+    }
+
+    private void showCartView() {
+        VBox cartBox = new VBox(10);
+        cartBox.setPadding(new Insets(20));
+        cartBox.setAlignment(Pos.CENTER);
+
+        // Cart title
+        Label cartTitle = new Label("Your Cart");
+        cartTitle.setFont(Font.font(18));
+
+        // ListView for cart items
+        ListView<String> cartListView = new ListView<>();
+        for (Item item : cart) {
+            cartListView.getItems().add(item.getName() + " - $" + item.getPrice());
+        }
+
+        // Place Order button
+        Button placeOrderButton = new Button("Place Your Order");
+        placeOrderButton.setOnAction(e -> {
+            if (!cart.isEmpty()) {
+                // Simulate placing an order
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Order Placed");
+                confirmationAlert.setHeaderText(null);
+                confirmationAlert.setContentText("Your order has been placed successfully!");
+                confirmationAlert.showAndWait();
+
+                // Clear the cart after placing the order
+                cart.clear();
+                updateCartSummary();
+                cartListView.getItems().clear();
+            } else {
+                // Show an error if the cart is empty
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText(null);
+                errorAlert.setContentText("Your cart is empty. Add items to place an order.");
+                errorAlert.showAndWait();
+            }
+        });
+
+        // Back button
+        Button backButton = new Button("Back to Restaurants");
+        backButton.setOnAction(e -> mainPane.setCenter(getPane()));
+
+        // Add elements to the cart view
+        cartBox.getChildren().addAll(cartTitle, cartListView, placeOrderButton, backButton);
+
+        // Display the cart view
+        mainPane.setCenter(cartBox);
+    }
+
+    private String getCartSummary() {
+        int itemCount = cart.size();
+        double totalPrice = cart.stream().mapToDouble(Item::getPrice).sum();
+        return String.format("%d items - $%.2f", itemCount, totalPrice);
+    }
+
+    private void updateCartSummary() {
+        cartSummaryLabel.setText(getCartSummary());
     }
 
     // Methods to generate restaurants and their menus
@@ -113,3 +200,4 @@ public class RestaurantMenuPane implements BasePane {
         subwayMenu.add(new Item("Soda", 2.49, true));
         return new Restaurant("Subway", "Sandwiches", "5", subwayMenu);
     }
+}
