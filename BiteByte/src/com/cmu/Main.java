@@ -117,11 +117,11 @@ public class Main extends Application {
     	customer1.orders.add(order2);
     	
     	DeliveryDriver deliveryDriver1 = userManager.getDriverByEmail("deliverydemo1@gmail.com");
-    	deliveryDriver1.addCompletedOrder(order2);
-    	deliveryDriver1.addOngoingOrder(order1.getOrderId(), order1);
+    	deliveryDriver1.addPendingOrder(order2);
+    	deliveryDriver1.addPendingOrder(order1);
     }
     
-    public static void main(String args[]) {
+    public static void main(String[] args) {
     	createCustomers();
     	createDrivers();
     	createOrders();

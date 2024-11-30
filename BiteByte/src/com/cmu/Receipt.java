@@ -4,6 +4,7 @@ public class Receipt {
     private Order order;
     private double totalPaid;
 
+    //Constructor
     public Receipt(Order order, double totalPaid) {
         this.order = order;
         this.totalPaid = totalPaid;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    // Attributes of the Order class
+    //variables
     private String orderId; 
     private User customer; 
     private Restaurant restaurant; 
@@ -15,7 +15,7 @@ public class Order {
     private LocalDateTime orderTime;
     private String restaurantName;
 
-    // Constructor to initialize an Order object
+    // Constructor
     public Order(String orderId, User customer, Restaurant restaurant) {
         this.orderId = orderId;
         this.customer = customer;
