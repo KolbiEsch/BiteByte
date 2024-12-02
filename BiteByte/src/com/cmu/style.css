@@ -1,4 +1,6 @@
-/* Global Styles */
+
+/* Applies a light gray background color to the root container, sets a default font family to Arial or sans-serif,
+   defines a base font size of 14px, and adds padding around the root container. */
 .root {
     -fx-background-color: #f5f5f5;
     -fx-font-family: "Arial", sans-serif;
@@ -8,6 +10,7 @@
 
 /* Label Styles */
 
+/* Applies a dark gray text color, larger font size, bold font weight, and padding to all labels. */
 .label {
     -fx-text-fill: #333333;
     -fx-font-size: 18px;
@@ -15,35 +18,27 @@
     -fx-padding: 10px;
 }
 
+/* Adds padding to the top of the label with ID `login-lbl`. */
 #login-lbl {
 	-fx-padding: 10px 0 0 0;
 }
 
+/* Adjusts the font size and weight for the label with ID `passwordLbl` to make it smaller and normal-weighted. */
 #passwordLbl {
 	-fx-font-size: 14px;
 	-fx-font-weight: normal;
 }
 
+/* Sets the text color to red for the label with ID `error-lbl` and adds padding at the top. */
 #error-lbl {
 	-fx-text-fill: red;
 	-fx-padding: 10px 0 0 0;
 }
 
-
-.table-view .column-header .label {
-	-fx-font-size: 10px;
-}
-
-.profile-pane .label {
-	-fx-padding: 10px 0 10px 0;
-}
-
-/* Text Field Styles */
-.profile-pane .text-field {
-	-fx-min-width: 200px;
-}
-
 /* Button Styles */
+
+/* Styles all buttons with a blue background, white text color, padding for size, bold text, rounded corners,
+   and a shadow effect for a polished look. */
 .button {
     -fx-background-color: #007bff;
     -fx-text-fill: white;
@@ -55,11 +50,15 @@
     -fx-effect: innershadow(gaussian, #000000, 10, 0.5, 1, 1);
 }
 
+/* Changes the button background color to a darker blue when hovered over for an interactive effect. */
 .button:hover {
     -fx-background-color: #0056b3;
 }
 
 /* ListView Styles */
+
+/* Sets the background color to white, adds a light border with specified width, defines a preferred height,
+   and adjusts font size, cell size, and padding for the list view component. */
 .list-view {
     -fx-background-color: #ffffff;
     -fx-border-color: #ddd;
@@ -70,18 +69,19 @@
     -fx-padding: 10px;
 }
 
+/* Defines the text color for list view cells to a dark gray for readability. */
 .list-view .list-cell {
     -fx-text-fill: #333333;
 }
 
+/* Changes the background color of a list view cell when hovered over for better user interaction. */
 .list-view .list-cell:hover {
     -fx-background-color: #f1f1f1;
 }
 
 /* Layout Styles */
+
+/* Defines spacing between elements in vertical box layouts and aligns them to the center. */
 .vbox {
     -fx-spacing: 15px;
     -fx-alignment: center;
-}
-
-/* Add additional styling as needed */
