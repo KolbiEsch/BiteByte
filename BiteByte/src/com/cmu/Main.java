@@ -28,6 +28,7 @@ public class Main extends Application {
     	ScrollPane scrollContainer = new ScrollPane();
         BorderPane pane = new BorderPane();
         scrollContainer.setContent(pane);
+        scrollContainer.setFitToWidth(true);
         
         LoginPane loginPane = new LoginPane(pane);
         pane.setCenter(loginPane.getPane());
